@@ -26,4 +26,13 @@ public class TeamService {
         }
         return resultSet;
     }
+
+    public String getStringTeams() {
+        String teams = "";
+        for (String team : getUniqueSortedTeams()) {
+            teams += team;
+            if (!team.equals(getUniqueSortedTeams().pollLast())) teams += "\n";
+        }
+        return teams;
+    }
 }

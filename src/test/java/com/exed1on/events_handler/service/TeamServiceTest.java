@@ -78,4 +78,24 @@ class TeamServiceTest {
         assertThat(teams.size()).isEqualTo(2);
         assertThat(teams).isEqualTo(preparedTeams);
     }
+    @Test
+    public void givenCompetitorEntityList_whenGetStringTeams_thenReturnStringOfTeams(){
+        CompetitorEntity competitor2 = CompetitorEntity.builder()
+                .id(2L)
+                .homeTeamName("Real Madrid CF")
+                .homeTeamCountry("Spain")
+                .awayTeamName("Paris Saint-Germain F.C.")
+                .awayTeamCountry("France")
+                .build();
+        given(competitorRepository.findAll()).willReturn(List.of(competitor1,competitor2));
+
+        String teamsString=teamService.getStringTeams();
+        String preparedTeamsString="FC Dynamo Kyiv"+"\n"
+                +"Legia Warsaw"+"\n"
+                +"Paris Saint-Germain F.C."+"\n"
+                +"Real Madrid CF";
+
+        assertThat(teamsString).isNotNull();
+        assertThat(teamsString).isEqualTo(preparedTeamsString);
+    }
 }
