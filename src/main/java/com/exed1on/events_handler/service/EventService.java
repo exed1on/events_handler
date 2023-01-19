@@ -24,5 +24,16 @@ public class EventService {
                 .collect(Collectors.toList());
         eventRepository.saveAll(eventEntities);
     }
+
+    public List<EventEntity> getEvents(int amount) {
+        List<EventEntity> resultList = new ArrayList<>();
+        List<EventEntity> allEvents = eventRepository.findAll();
+        for (int i = 0; i < amount; i++) {
+            if (i == (long) allEvents.size()) break;
+            resultList.add(allEvents.get(i));
+        }
+        System.out.println(resultList);
+        return resultList;
+    }
 }
 

@@ -4,6 +4,7 @@ import com.exed1on.events_handler.mapper.EventResponse;
 import com.exed1on.events_handler.reader.JsonFileReader;
 import com.exed1on.events_handler.service.CompetitorService;
 import com.exed1on.events_handler.service.EventService;
+import com.exed1on.events_handler.service.EventsShowService;
 import com.exed1on.events_handler.service.VenueService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,5 +30,7 @@ public class LoadDatabase {
             venueService.saveVenues(eventResponse);
 
         };
+
+
     }
 }

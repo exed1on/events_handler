@@ -23,4 +23,15 @@ public class VenueService {
                 .collect(Collectors.toList());
         venueRepository.saveAll(venueEntities);
     }
+
+    public List<VenueEntity> getVenues(int amount) {
+        List<VenueEntity> resultList = new ArrayList<>();
+        List<VenueEntity> allEvents = venueRepository.findAll();
+        for (int i = 0; i < amount; i++) {
+            if (i == (long) allEvents.size()) break;
+            resultList.add(allEvents.get(i));
+        }
+        System.out.println(resultList);
+        return resultList;
+    }
 }

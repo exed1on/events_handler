@@ -23,4 +23,15 @@ public class CompetitorService {
                 .collect(Collectors.toList());
         competitorRepository.saveAll(competitorEntities);
     }
+
+    public List<CompetitorEntity> getCompetitors(int amount) {
+        List<CompetitorEntity> resultList = new ArrayList<>();
+        List<CompetitorEntity> allEvents = competitorRepository.findAll();
+        for (int i = 0; i < amount; i++) {
+            if (i == (long) allEvents.size()) break;
+            resultList.add(allEvents.get(i));
+        }
+        System.out.println(resultList);
+        return resultList;
+    }
 }
