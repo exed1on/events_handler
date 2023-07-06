@@ -4,6 +4,8 @@ import com.exed1on.events_handler.service.TeamService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.TreeSet;
+
 @RestController
 public class TeamsController {
     private final TeamService teamService;
@@ -13,7 +15,7 @@ public class TeamsController {
     }
 
     @GetMapping("/teams")
-    public String getTeams() {
-        return teamService.getStringTeams();
+    public TreeSet<String> getTeams() {
+        return teamService.getTeams();
     }
 }

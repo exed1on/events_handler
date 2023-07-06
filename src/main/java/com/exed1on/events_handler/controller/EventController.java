@@ -1,5 +1,6 @@
 package com.exed1on.events_handler.controller;
 
+import com.exed1on.events_handler.entity.EventEntity;
 import com.exed1on.events_handler.repository.EventRepository;
 import com.exed1on.events_handler.service.EventsShowService;
 import jakarta.servlet.http.HttpServletResponse;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 public class EventController {
@@ -20,23 +22,18 @@ public class EventController {
         this.eventsShowService = eventsShowService;
     }
 
-    private String result = "";
-
     @GetMapping("/events")
-    public String getAllEvents(@RequestParam(required = false, defaultValue = "10") String matches, HttpServletResponse response) throws IOException {
-        int numberMatches;
+    public List<EventEntity> getAllEvents(@RequestParam(required = false, defaultValue = "10") String matches, HttpServletResponse response) throws IOException {
+        int numberMatches = 0;
         try {
             numberMatches = Integer.parseInt(matches);
             if (numberMatches < 1) response.sendRedirect("/events?matches=1");
             else if (numberMatches > eventRepository.count())
                 response.sendRedirect("/events?matches=" + eventRepository.count());
-            else {
-                result = eventsShowService.getStringEvents(numberMatches);
-            }
         } catch (Exception e) {
             response.sendRedirect("/events?matches=1");
         }
 
-        return result;
+        return eventsShowService.getEvents(numberMatches);
     }
 }
